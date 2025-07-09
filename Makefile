@@ -3,7 +3,8 @@ SRC_DIR := src
 INC_DIR := include
 CFLAGS := 
 CC := gcc
-SOURCES := $(wildcard $(SRC_DIR)/*.c)
+
+SOURCES := $(shell find $(SRC_DIR) -name '*.c')
 
 ifeq ($(OS), Windows_NT)
 	EXE_EXT := .exe
