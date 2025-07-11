@@ -48,7 +48,6 @@ Um sistema em linguagem C para gerenciamento de produtos, incluindo cadastro, al
 
 - Ariel Pina Ribeiro
 - Bruno Gabriel Leite de Matos
-- Camilla Matos Araujo
 - Henrique Sousa Brito
 - Maria Luiza Oliva Santos
 

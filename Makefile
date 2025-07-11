@@ -1,7 +1,7 @@
 OUT_DIR := build
 SRC_DIR := src
 INC_DIR := include
-CFLAGS := 
+CFLAGS := -Wall -Wextra -std=c99
 CC := gcc
 
 SOURCES := $(shell find $(SRC_DIR) -name '*.c')
