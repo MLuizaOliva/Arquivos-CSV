@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 void limparTela()
 {
@@ -7,4 +8,17 @@ void limparTela()
 #else
   system("clear");
 #endif
+}
+
+void limparBuffer()
+{
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF)
+    ;
+}
+
+void pausarTela()
+{
+  printf("\nPressione Enter para continuar...");
+  getchar();
 }

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "menu.h"
 #include "../Utils/utils.h"
+#include "../Arquivos/arquivo.h"
 #include "../Produto/produto.h"
 #include "../Material/material.h"
 
@@ -39,119 +40,125 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
     while (scanf("%d", &opcao) != 1)
     {
       printf("Entrada inválida! Digite um número correspondente à opção: ");
+      limparBuffer();
     }
+
+    limparTela();
 
     switch (opcao)
     {
     case 1:
       if (*arvoreMaterias == NULL)
       {
-        limparTela();
         printf("\nNenhuma matéria-prima cadastrada! Cadastre ao menos uma antes de criar um produto.\n");
       }
       else
       {
-        limparTela();
-        // cadastrarProduto(listaProdutos, *arvoreMaterias);
+        cadastrarProduto(listaProdutos, *arvoreMaterias);
       }
       break;
+
     case 2:
       if (*listaProdutos == NULL)
       {
-        limparTela();
         printf("\nNenhum produto cadastrado para excluir.\n");
       }
       else
       {
-        // excluirProduto(listaProdutos);
+        int codigo;
+        printf("Informe o código do produto a excluir: ");
+        scanf("%d", &codigo);
+        excluirProduto(listaProdutos, codigo);
+        printf("Produto excluído com sucesso.\n");
       }
       break;
+
     case 3:
       if (*listaProdutos == NULL)
       {
-        limparTela();
         printf("\nNenhum produto cadastrado para alterar.\n");
       }
       else
       {
-        limparTela();
-        // alterarProduto(*listaProdutos, *arvoreMaterias);
+        alterarProduto(*listaProdutos, *arvoreMaterias);
       }
       break;
+
     case 4:
-      limparTela();
-      // cadastrarMaterias(arvoreMaterias);
+      cadastrarMaterias(arvoreMaterias);
       break;
+
     case 5:
       if (*arvoreMaterias == NULL)
       {
-        limparTela();
         printf("\nNenhuma matéria-prima cadastrada para excluir.\n");
       }
       else
       {
-        limparTela();
-        // excluirMaterias(arvoreMaterias, listaProdutos);
+        excluirMaterias(arvoreMaterias, listaProdutos);
       }
       break;
+
     case 6:
       if (*arvoreMaterias == NULL)
       {
-        limparTela();
         printf("\nNenhuma matéria-prima cadastrada para alterar.\n");
       }
       else
       {
-        limparTela();
-        // alterarMaterias(*arvoreMaterias);
+        alterarMaterias(*arvoreMaterias);
       }
       break;
+
     case 7:
       if (*listaProdutos == NULL)
       {
-        limparTela();
         printf("\nNenhum produto cadastrado para listar.\n");
       }
       else
       {
-        // listarProdutos(*listaProdutos);
+        listarProdutos(*listaProdutos, *arvoreMaterias);
       }
       break;
+
     case 8:
       if (*arvoreMaterias == NULL)
       {
-        limparTela();
         printf("\nNenhuma matéria-prima cadastrada para listar.\n");
       }
       else
       {
-        // imprimirMaterias(*arvoreMaterias);
+        imprimirMaterias(*arvoreMaterias);
       }
       break;
+
     case 9:
       if (*listaProdutos == NULL)
       {
-        limparTela();
         printf("\nNenhum produto cadastrado para calcular preço.\n");
       }
       else
       {
-        limparTela();
-        // calcularPrecoProduto(*listaProdutos);
+        calcularPrecoProduto(*listaProdutos, *arvoreMaterias);
       }
       break;
+
     case 10:
-      limparTela();
-      // salvarDadosCSV(*listaProdutos, *arvoreMaterias);
+      salvar_produtos(*listaProdutos);
+      salvar_materias_primas(*arvoreMaterias);
+      salvar_produtos_materias(*listaProdutos);
       printf("\nDados salvos com sucesso!\n");
       break;
+
     case 0:
       printf("\nEncerrando o programa...\n");
       break;
+
     default:
-      limparTela();
       printf("\nOpção inválida. Tente novamente.\n");
     }
+
+    pausarTela();
 
   } while (opcao != 0);
 }
