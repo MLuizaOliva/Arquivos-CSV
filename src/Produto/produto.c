@@ -124,7 +124,10 @@ void excluirProduto(Produto **lista, int codigo)
     atual = atual->prox;
 
   if (!atual)
+  {
+    printf("Produto com codigo %d nao encontrado.\n", codigo);
     return;
+  }
 
   if (atual->ant)
     atual->ant->prox = atual->prox;
@@ -133,6 +136,8 @@ void excluirProduto(Produto **lista, int codigo)
 
   if (atual->prox)
     atual->prox->ant = atual->ant;
+
+  printf("Produto '%s' (Codigo: %d) excluido com sucesso!\n", atual->nome, atual->codigo);
 
   free(atual->nome);
 

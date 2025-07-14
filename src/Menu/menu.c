@@ -32,7 +32,7 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
     printf("7. Listar Produtos\n");
     printf("8. Listar Materias-Primas\n");
     printf("9. Calcular Preco de Produto\n");
-    printf("10. Salvar Alteracões\n");
+    printf("10. Salvar Alteracoes\n");
     printf("0. Sair\n");
     printf("========================================\n");
     printf("Escolha uma opcao: ");
@@ -69,7 +69,6 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
         printf("Informe o codigo do produto a excluir: ");
         scanf("%d", &codigo);
         excluirProduto(listaProdutos, codigo);
-        printf("Produto excluído com sucesso.\n");
       }
       break;
 
