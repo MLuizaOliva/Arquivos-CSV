@@ -25,10 +25,7 @@ typedef struct Produto
 Produto *criarProduto(const char *nome, int codigo, float margem);
 
 // Função para cadastrar um produto
-void cadastrarProduto(Produto **lista, MatPrima *arvoreMaterias);
-
-// Função para alterar um produto
-void alterarProduto(Produto *lista, MatPrima *arvoreMaterias);
+void cadastrarProduto(Produto **lista);
 
 // Insere produto na lista duplamente encadeada
 void inserirProduto(Produto **lista, Produto *novo);
@@ -37,7 +34,7 @@ void inserirProduto(Produto **lista, Produto *novo);
 void excluirProduto(Produto **lista, int codigo);
 
 // Altera os dados de um produto (nome, margem e matérias-primas)
-void alterarProduto(Produto *produto, MatPrima *arvoreMaterias);
+void alterarProduto(Produto *produto);
 
 // Busca um produto por código
 Produto *buscarProdutoPorCodigo(Produto *lista, int codigo);

@@ -33,7 +33,7 @@ Um sistema em linguagem C para gerenciamento de produtos, incluindo cadastro, al
       ```
 4. Execute o programa::
    ```bash
-   ./Arquivos-CSV
+   make run
    ```
 
 ## 🧱 Estruturas de Dados Utilizadas

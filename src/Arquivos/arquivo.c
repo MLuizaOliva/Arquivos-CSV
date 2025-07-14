@@ -263,7 +263,7 @@ int adicionar_materia_prima_arquivo(MatPrima *materia)
     return resultado;
 }
 
-int atualizar_materia_prima_arquivo(int codigo, MatPrima *nova_materia)
+int atualizar_materia_prima_arquivo()
 {
     MatPrima *raiz = NULL;
     int resultado = carregar_materias_primas(&raiz);
@@ -275,11 +275,6 @@ int atualizar_materia_prima_arquivo(int codigo, MatPrima *nova_materia)
     resultado = salvar_materias_primas(raiz);
 
     return resultado;
-}
-
-int remover_materia_prima_arquivo(int codigo)
-{
-    return SUCESSO;
 }
 
 // =====================================================
@@ -399,16 +394,6 @@ int adicionar_produto_arquivo(Produto *produto)
 
     fechar_arquivo(arquivo);
     return resultado;
-}
-
-int atualizar_produto_arquivo(int codigo, Produto *novo_produto)
-{
-    return SUCESSO;
-}
-
-int remover_produto_arquivo(int codigo)
-{
-    return SUCESSO;
 }
 
 // =====================================================
@@ -535,11 +520,6 @@ int adicionar_produto_materia_arquivo(int codigo_produto, int codigo_materia, in
 
     fechar_arquivo(arquivo);
     return resultado;
-}
-
-int remover_produto_materia_arquivo(int codigo_produto, int codigo_materia)
-{
-    return SUCESSO;
 }
 
 // =====================================================

@@ -1,4 +1,4 @@
-#include <stdio.h> 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "material.h"
@@ -8,19 +8,24 @@
 
 // ==================== Funções auxiliares internas ====================
 //             (Declarações internas não expostas no header)
-static MatPrima* criarNoMateria(int codigo, const char *nome, float preco);
-static MatPrima* minimoSubarvore(MatPrima *n);
-static MatPrima* removerNo(MatPrima *raiz, int codigo, int *ok);
+static MatPrima *criarNoMateria(int codigo, const char *nome, float preco);
+static MatPrima *minimoSubarvore(MatPrima *n);
+static MatPrima *removerNo(MatPrima *raiz, int codigo, int *ok);
 
 // ==================== CRUD da Árvore ====================
 
 /* Insere uma nova matéria-prima na árvore. */
-MatPrima* inserirMateriaArvore(MatPrima *raiz, MatPrima *nova) {
-    if (!raiz) return nova;
+MatPrima *inserirMateriaArvore(MatPrima *raiz, MatPrima *nova)
+{
+    if (!raiz)
+        return nova;
 
-    if (nova->codigo < raiz->codigo) {
+    if (nova->codigo < raiz->codigo)
+    {
         raiz->esq = inserirMateriaArvore(raiz->esq, nova);
-    } else if (nova->codigo > raiz->codigo) {
+    }
+    else if (nova->codigo > raiz->codigo)
+    {
         raiz->dir = inserirMateriaArvore(raiz->dir, nova);
     }
 
@@ -28,9 +33,12 @@ MatPrima* inserirMateriaArvore(MatPrima *raiz, MatPrima *nova) {
 }
 
 /* Busca uma matéria-prima pelo código. */
-MatPrima* buscarMateriaPorCodigo(MatPrima *raiz, int codigo) {
-    while (raiz) {
-        if (codigo == raiz->codigo) return raiz;
+MatPrima *buscarMateriaPorCodigo(MatPrima *raiz, int codigo)
+{
+    while (raiz)
+    {
+        if (codigo == raiz->codigo)
+            return raiz;
         raiz = (codigo < raiz->codigo) ? raiz->esq : raiz->dir;
     }
 
@@ -38,26 +46,32 @@ MatPrima* buscarMateriaPorCodigo(MatPrima *raiz, int codigo) {
 }
 
 /* Remove uma matéria-prima pelo código. */
-MatPrima* removerMateriaArvore(MatPrima *raiz, int codigo, int *ok) {
+MatPrima *removerMateriaArvore(MatPrima *raiz, int codigo, int *ok)
+{
     return removerNo(raiz, codigo, ok);
 }
 
 // ==================== Operações de alto nível (menu) ====================
 
 /* Lê dados do usuário e cadastra uma nova matéria-prima na memória. */
-void cadastrarMaterias(MatPrima **raiz) {
+void cadastrarMaterias(MatPrima **raiz)
+{
     int codigo;
     char nome[100];
     float preco;
 
     printf("=== Cadastrar Matéria-Prima ===\n");
-    printf("Código: ");       scanf("%d", &codigo);
+    printf("Código: ");
+    scanf("%d", &codigo);
     limparBuffer();
-    printf("Nome:   ");       fgets(nome, sizeof(nome), stdin);
+    printf("Nome:   ");
+    fgets(nome, sizeof(nome), stdin);
     nome[strcspn(nome, "\n")] = '\0';
-    printf("Preço:  ");       scanf("%f", &preco);
+    printf("Preço:  ");
+    scanf("%f", &preco);
 
-    if (buscarMateriaPorCodigo(*raiz, codigo)) {
+    if (buscarMateriaPorCodigo(*raiz, codigo))
+    {
         printf("Erro: código %d já existe.\n", codigo);
         return;
     }
@@ -69,13 +83,15 @@ void cadastrarMaterias(MatPrima **raiz) {
 }
 
 /* Lê código, novo nome e preço, e altera a matéria-prima em memória. */
-void alterarMaterias(MatPrima *raiz) {
+void alterarMaterias(MatPrima *raiz)
+{
     int codigo;
     printf("=== Alterar Matéria-Prima ===\nCódigo: ");
     scanf("%d", &codigo);
 
     MatPrima *m = buscarMateriaPorCodigo(raiz, codigo);
-    if (!m) {
+    if (!m)
+    {
         printf("Erro: código não encontrado.\n");
         return;
     }
@@ -91,22 +107,27 @@ void alterarMaterias(MatPrima *raiz) {
     scanf("%f", &novoPreco);
 
     free(m->nome);
-    m->nome  = malloc(strlen(novoNome) + 1);
-    if (m->nome) strcpy(m->nome, novoNome);
+    m->nome = malloc(strlen(novoNome) + 1);
+    if (m->nome)
+        strcpy(m->nome, novoNome);
     m->preco = novoPreco;
 
     printf("Matéria-prima alterada (memória)!\n");
 }
 
 /* Exclui matéria-prima da memória se não estiver vinculada a produtos. */
-void excluirMaterias(MatPrima **raiz, Produto **listaProdutos) {
+void excluirMaterias(MatPrima **raiz, Produto **listaProdutos)
+{
     int codigo;
     printf("=== Excluir Matéria-Prima ===\nCódigo: ");
     scanf("%d", &codigo);
 
-    for (Produto *p = *listaProdutos; p; p = p->prox) {
-        for (MatProduto *mp = p->ini_mat; mp; mp = mp->prox) {
-            if (mp->codigo_mat == codigo) {
+    for (Produto *p = *listaProdutos; p; p = p->prox)
+    {
+        for (MatProduto *mp = p->ini_mat; mp; mp = mp->prox)
+        {
+            if (mp->codigo_mat == codigo)
+            {
                 printf("Erro: matéria-prima usada pelo produto %d (%s).\n", p->codigo, p->nome);
                 return;
             }
@@ -115,7 +136,8 @@ void excluirMaterias(MatPrima **raiz, Produto **listaProdutos) {
 
     int ok = 0;
     *raiz = removerMateriaArvore(*raiz, codigo, &ok);
-    if (!ok) {
+    if (!ok)
+    {
         printf("Erro: código não encontrado.\n");
         return;
     }
@@ -124,9 +146,10 @@ void excluirMaterias(MatPrima **raiz, Produto **listaProdutos) {
 }
 
 /* Imprime todas as matérias-primas em ordem crescente de código. */
-void imprimirMaterias(MatPrima *raiz) {
-    if (!raiz) {
-        printf("Nenhuma matéria-prima cadastrada.\n");
+void imprimirMaterias(MatPrima *raiz)
+{
+    if (!raiz)
+    {
         return;
     }
 
@@ -136,18 +159,31 @@ void imprimirMaterias(MatPrima *raiz) {
     imprimirMaterias(raiz->dir);
 }
 
+void imprimirTodasMaterias(MatPrima *raiz)
+{
+    if (!raiz)
+    {
+        printf("Nenhuma matéria-prima cadastrada.\n");
+        return;
+    }
+    imprimirMaterias(raiz);
+}
+
 // ==================== Funções auxiliares internas ====================
 
 /* Cria e inicializa um novo nó de matéria-prima. */
-static MatPrima* criarNoMateria(int codigo, const char *nome, float preco) {
+static MatPrima *criarNoMateria(int codigo, const char *nome, float preco)
+{
     MatPrima *m = malloc(sizeof(MatPrima));
-    if (!m) return NULL;
+    if (!m)
+        return NULL;
 
     m->codigo = codigo;
-    m->nome   = malloc(strlen(nome) + 1);
+    m->nome = malloc(strlen(nome) + 1);
 
-    if (m->nome) strcpy(m->nome, nome);
-    m->preco  = preco;
+    if (m->nome)
+        strcpy(m->nome, nome);
+    m->preco = preco;
     m->esq = NULL;
     m->dir = NULL;
 
@@ -155,8 +191,10 @@ static MatPrima* criarNoMateria(int codigo, const char *nome, float preco) {
 }
 
 /* Retorna o nó de menor chave na subárvore. */
-static MatPrima* minimoSubarvore(MatPrima *n) {
-    while (n && n->esq) {
+static MatPrima *minimoSubarvore(MatPrima *n)
+{
+    while (n && n->esq)
+    {
         n = n->esq;
     }
 
@@ -164,16 +202,24 @@ static MatPrima* minimoSubarvore(MatPrima *n) {
 }
 
 /* Remove o nó com código dado da árvore (implementação interna). */
-static MatPrima* removerNo(MatPrima *raiz, int codigo, int *ok) {
-    if (!raiz) return NULL;
-    if (codigo < raiz->codigo) {
+static MatPrima *removerNo(MatPrima *raiz, int codigo, int *ok)
+{
+    if (!raiz)
+        return NULL;
+    if (codigo < raiz->codigo)
+    {
         raiz->esq = removerNo(raiz->esq, codigo, ok);
-    } else if (codigo > raiz->codigo) {
+    }
+    else if (codigo > raiz->codigo)
+    {
         raiz->dir = removerNo(raiz->dir, codigo, ok);
-    } else {
+    }
+    else
+    {
         *ok = 1;
 
-        if (!raiz->esq || !raiz->dir) {
+        if (!raiz->esq || !raiz->dir)
+        {
             MatPrima *filho = raiz->esq ? raiz->esq : raiz->dir;
             free(raiz->nome);
             free(raiz);
@@ -183,10 +229,11 @@ static MatPrima* removerNo(MatPrima *raiz, int codigo, int *ok) {
         MatPrima *suc = minimoSubarvore(raiz->dir);
         free(raiz->nome);
         raiz->codigo = suc->codigo;
-        raiz->nome   = malloc(strlen(suc->nome) + 1);
-        if (raiz->nome) strcpy(raiz->nome, suc->nome);
-        raiz->preco  = suc->preco;
-        raiz->dir    = removerNo(raiz->dir, suc->codigo, ok);
+        raiz->nome = malloc(strlen(suc->nome) + 1);
+        if (raiz->nome)
+            strcpy(raiz->nome, suc->nome);
+        raiz->preco = suc->preco;
+        raiz->dir = removerNo(raiz->dir, suc->codigo, ok);
     }
 
     return raiz;

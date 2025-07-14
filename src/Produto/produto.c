@@ -12,7 +12,9 @@ Produto *criarProduto(const char *nome, int codigo, float margem)
   if (!novo)
     return NULL;
 
-  novo->nome = strdup(nome);
+  novo->nome = malloc(strlen(nome) + 1);
+  if (novo->nome)
+    strcpy(novo->nome, nome);
   novo->codigo = codigo;
   novo->margemLucro = margem;
   novo->prox = NULL;
@@ -23,7 +25,7 @@ Produto *criarProduto(const char *nome, int codigo, float margem)
 }
 
 /* Realiza cadastro de um novo produto com dados do usuário */
-void cadastrarProduto(Produto **lista, MatPrima *arvoreMaterias)
+void cadastrarProduto(Produto **lista)
 {
   char nome[100];
   int codigo, qtdeMat, codMat, qtde;
@@ -62,7 +64,7 @@ void cadastrarProduto(Produto **lista, MatPrima *arvoreMaterias)
 }
 
 /* Altera nome e margem de lucro de um produto existente */
-void alterarProduto(Produto *lista, MatPrima *arvoreMaterias)
+void alterarProduto(Produto *lista)
 {
   int codigo;
   printf("Digite o código do produto a alterar: ");
@@ -85,7 +87,13 @@ void alterarProduto(Produto *lista, MatPrima *arvoreMaterias)
   scanf("%f", &p->margemLucro);
 
   free(p->nome);
-  p->nome = strdup(novoNome);
+  p->nome = malloc(strlen(novoNome) + 1);
+  if (p->nome)
+    strcpy(p->nome, novoNome);
+  else
+  {
+    printf("Erro ao alocar memória para o nome do produto.\n");
+  }
 
   printf("Produto alterado com sucesso!\n");
 }

@@ -54,7 +54,7 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
       }
       else
       {
-        cadastrarProduto(listaProdutos, *arvoreMaterias);
+        cadastrarProduto(listaProdutos);
       }
       break;
 
@@ -80,7 +80,7 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
       }
       else
       {
-        alterarProduto(*listaProdutos, *arvoreMaterias);
+        alterarProduto(*listaProdutos);
       }
       break;
 
@@ -157,8 +157,5 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
     default:
       printf("\nOpção inválida. Tente novamente.\n");
     }
-
-    pausarTela();
-
   } while (opcao != 0);
 }
