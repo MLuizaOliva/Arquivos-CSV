@@ -5,7 +5,7 @@
 #include "../Material/material.h"
 #include "produto.h"
 
-/* Cria um novo produto com nome, código e margem de lucro */
+/* Cria um novo produto com nome, codigo e margem de lucro */
 Produto *criarProduto(const char *nome, int codigo, float margem)
 {
   Produto *novo = (Produto *)malloc(sizeof(Produto));
@@ -24,7 +24,7 @@ Produto *criarProduto(const char *nome, int codigo, float margem)
   return novo;
 }
 
-/* Realiza cadastro de um novo produto com dados do usuário */
+/* Realiza cadastro de um novo produto com dados do usuario */
 void cadastrarProduto(Produto **lista)
 {
   char nome[100];
@@ -36,7 +36,7 @@ void cadastrarProduto(Produto **lista)
   fgets(nome, sizeof(nome), stdin);
   nome[strcspn(nome, "\n")] = '\0';
 
-  printf("Código do produto: ");
+  printf("Codigo do produto: ");
   scanf("%d", &codigo);
 
   printf("Margem de lucro (ex: 0.20 = 20%%): ");
@@ -44,14 +44,14 @@ void cadastrarProduto(Produto **lista)
 
   Produto *novo = criarProduto(nome, codigo, margem);
 
-  printf("Quantas matérias-primas o produto possui? ");
+  printf("Quantas materias-primas o produto possui? ");
   scanf("%d", &qtdeMat);
 
   for (int i = 0; i < qtdeMat; i++)
   {
-    printf("Código da matéria-prima #%d: ", i + 1);
+    printf("Codigo da materia-prima #%d: ", i + 1);
     scanf("%d", &codMat);
-    printf("Quantidade necessária: ");
+    printf("Quantidade necessaria: ");
     scanf("%d", &qtde);
 
     MatProduto *mp = criarMateriaProduto(codMat, qtde);
@@ -67,13 +67,13 @@ void cadastrarProduto(Produto **lista)
 void alterarProduto(Produto *lista)
 {
   int codigo;
-  printf("Digite o código do produto a alterar: ");
+  printf("Digite o codigo do produto a alterar: ");
   scanf("%d", &codigo);
 
   Produto *p = buscarProdutoPorCodigo(lista, codigo);
   if (!p)
   {
-    printf("Produto não encontrado.\n");
+    printf("Produto nao encontrado.\n");
     return;
   }
 
@@ -92,7 +92,7 @@ void alterarProduto(Produto *lista)
     strcpy(p->nome, novoNome);
   else
   {
-    printf("Erro ao alocar memória para o nome do produto.\n");
+    printf("Erro ao alocar memoria para o nome do produto.\n");
   }
 
   printf("Produto alterado com sucesso!\n");
@@ -115,7 +115,7 @@ void inserirProduto(Produto **lista, Produto *novo)
   }
 }
 
-/* Remove um produto da lista pelo código */
+/* Remove um produto da lista pelo codigo */
 void excluirProduto(Produto **lista, int codigo)
 {
   Produto *atual = *lista;
@@ -147,7 +147,7 @@ void excluirProduto(Produto **lista, int codigo)
   free(atual);
 }
 
-/* Busca um produto na lista pelo código */
+/* Busca um produto na lista pelo codigo */
 Produto *buscarProdutoPorCodigo(Produto *lista, int codigo)
 {
   while (lista)
@@ -159,12 +159,12 @@ Produto *buscarProdutoPorCodigo(Produto *lista, int codigo)
   return NULL;
 }
 
-/* Lista todos os produtos e suas matérias-primas associadas */
+/* Lista todos os produtos e suas materias-primas associadas */
 void listarProdutos(Produto *lista, MatPrima *arvoreMaterias)
 {
   while (lista)
   {
-    printf("Produto: %s (Código: %d)\n", lista->nome, lista->codigo);
+    printf("Produto: %s (Codigo: %d)\n", lista->nome, lista->codigo);
     printf("Margem de Lucro: %.2f%%\n", lista->margemLucro * 100);
     listarMateriasDeProduto(lista->ini_mat, arvoreMaterias);
     printf("----------------------------------------\n");
@@ -172,17 +172,17 @@ void listarProdutos(Produto *lista, MatPrima *arvoreMaterias)
   }
 }
 
-/* Calcula e exibe o preço final de um produto considerando margem e matérias-primas */
+/* Calcula e exibe o preco final de um produto considerando margem e materias-primas */
 void calcularPrecoProduto(Produto *lista, MatPrima *arvoreMaterias)
 {
   int codigo;
-  printf("Informe o código do produto: ");
+  printf("Informe o codigo do produto: ");
   scanf("%d", &codigo);
 
   Produto *p = buscarProdutoPorCodigo(lista, codigo);
   if (!p)
   {
-    printf("Produto não encontrado.\n");
+    printf("Produto nao encontrado.\n");
     return;
   }
 
@@ -199,10 +199,10 @@ void calcularPrecoProduto(Produto *lista, MatPrima *arvoreMaterias)
   float precoFinal = custo * (1 + p->margemLucro);
 
   printf("Custo do Produto: R$ %.2f\n", custo);
-  printf("Preço Final (com lucro): R$ %.2f\n", precoFinal);
+  printf("Preco Final (com lucro): R$ %.2f\n", precoFinal);
 }
 
-/* Cria uma nova matéria-prima associada a um produto */
+/* Cria uma nova materia-prima associada a um produto */
 MatProduto *criarMateriaProduto(int codigo_mat, int qtde)
 {
   MatProduto *nova = (MatProduto *)malloc(sizeof(MatProduto));
@@ -217,7 +217,7 @@ MatProduto *criarMateriaProduto(int codigo_mat, int qtde)
   return nova;
 }
 
-/* Insere uma matéria-prima na lista encadeada do produto */
+/* Insere uma materia-prima na lista encadeada do produto */
 void inserirMateriaProduto(MatProduto **lista, MatProduto *nova)
 {
   if (*lista == NULL)
@@ -234,7 +234,7 @@ void inserirMateriaProduto(MatProduto **lista, MatProduto *nova)
   }
 }
 
-/* Remove uma matéria-prima da lista do produto pelo código */
+/* Remove uma materia-prima da lista do produto pelo codigo */
 void removerMateriaProduto(MatProduto **lista, int codigo_mat)
 {
   MatProduto *atual = *lista;
@@ -256,27 +256,27 @@ void removerMateriaProduto(MatProduto **lista, int codigo_mat)
   free(atual);
 }
 
-/* Lista as matérias-primas associadas a um produto, exibindo detalhes */
+/* Lista as materias-primas associadas a um produto, exibindo detalhes */
 void listarMateriasDeProduto(MatProduto *lista, MatPrima *arvoreMaterias)
 {
   if (lista == NULL)
   {
-    printf("Nenhuma matéria-prima vinculada a este produto.\n");
+    printf("Nenhuma materia-prima vinculada a este produto.\n");
     return;
   }
 
-  printf("Matérias-primas:\n");
+  printf("Materias-primas:\n");
   while (lista)
   {
     MatPrima *m = buscarMateriaPorCodigo(arvoreMaterias, lista->codigo_mat);
     if (m)
     {
-      printf("- %s (Código %d), Quantidade: %d, Preço unitário: R$ %.2f\n",
+      printf("- %s (Codigo %d), Quantidade: %d, Preco unitario: R$ %.2f\n",
              m->nome, m->codigo, lista->qtde, m->preco);
     }
     else
     {
-      printf("- Código %d não encontrado na árvore de matérias-primas\n", lista->codigo_mat);
+      printf("- Codigo %d nao encontrado na arvore de materias-primas\n", lista->codigo_mat);
     }
     lista = lista->prox;
   }
