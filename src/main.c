@@ -13,7 +13,6 @@
  *  Autores:
  *   - Ariel Pina Ribeiro
  *   - Bruno Gabriel Leite de Matos
- *   - Camilla Matos Araujo
  *   - Henrique Sousa Brito
  *   - Maria Luiza Oliva Santos
  *
