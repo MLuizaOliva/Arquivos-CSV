@@ -15,36 +15,58 @@ void exibirTitle()
   printf("========================================\n\n");
 }
 
-void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
+void exibirMenuPrincipal()
+{
+  printf("1. Produtos\n");
+  printf("2. Materias-Primas\n");
+  printf("3. Visualizar Preco de Produto\n");
+  printf("4. Salvar Alteracoes\n");
+  printf("0. Sair\n");
+  printf("========================================\n");
+  printf("Escolha uma opcao: ");
+}
+
+void exibirSubmenuProdutos()
+{
+  printf("\n--- PRODUTOS ---\n");
+  printf("1. Inserir Produto\n");
+  printf("2. Excluir Produto\n");
+  printf("3. Alterar Produto\n");
+  printf("4. Listar Produtos\n");
+  printf("0. Voltar ao Menu Principal\n");
+  printf("========================================\n");
+  printf("Escolha uma opcao: ");
+}
+
+void exibirSubmenuMaterias()
+{
+  printf("\n--- MATERIAS-PRIMAS ---\n");
+  printf("1. Inserir Materia-Prima\n");
+  printf("2. Excluir Materia-Prima\n");
+  printf("3. Alterar Materia-Prima\n");
+  printf("4. Listar Materias-Primas\n");
+  printf("0. Voltar ao Menu Principal\n");
+  printf("========================================\n");
+  printf("Escolha uma opcao: ");
+}
+
+void menuProdutos(Produto **listaProdutos, MatPrima **arvoreMaterias)
 {
   int opcao;
-
+  
   do
   {
     exibirTitle();
-
-    printf("1. Inserir Produto\n");
-    printf("2. Excluir Produto\n");
-    printf("3. Alterar Produto\n");
-    printf("4. Inserir Materia-Prima\n");
-    printf("5. Excluir Materia-Prima\n");
-    printf("6. Alterar Materia-Prima\n");
-    printf("7. Listar Produtos\n");
-    printf("8. Listar Materias-Primas\n");
-    printf("9. Calcular Preco de Produto\n");
-    printf("10. Salvar Alteracoes\n");
-    printf("0. Sair\n");
-    printf("========================================\n");
-    printf("Escolha uma opcao: ");
-
+    exibirSubmenuProdutos();
+    
     while (scanf("%d", &opcao) != 1)
     {
       printf("Entrada invalida! Digite um numero correspondente à opcao: ");
       limparBuffer();
     }
-
+    
     limparTela();
-
+    
     switch (opcao)
     {
     case 1:
@@ -57,7 +79,7 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
         cadastrarProduto(listaProdutos);
       }
       break;
-
+      
     case 2:
       if (*listaProdutos == NULL)
       {
@@ -71,7 +93,7 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
         excluirProduto(listaProdutos, codigo);
       }
       break;
-
+      
     case 3:
       if (*listaProdutos == NULL)
       {
@@ -82,34 +104,8 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
         alterarProduto(*listaProdutos);
       }
       break;
-
+      
     case 4:
-      cadastrarMaterias(arvoreMaterias);
-      break;
-
-    case 5:
-      if (*arvoreMaterias == NULL)
-      {
-        printf("\nNenhuma materia-prima cadastrada para excluir.\n");
-      }
-      else
-      {
-        excluirMaterias(arvoreMaterias, listaProdutos);
-      }
-      break;
-
-    case 6:
-      if (*arvoreMaterias == NULL)
-      {
-        printf("\nNenhuma materia-prima cadastrada para alterar.\n");
-      }
-      else
-      {
-        alterarMaterias(*arvoreMaterias);
-      }
-      break;
-
-    case 7:
       if (*listaProdutos == NULL)
       {
         printf("\nNenhum produto cadastrado para listar.\n");
@@ -119,8 +115,63 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
         listarProdutos(*listaProdutos, *arvoreMaterias);
       }
       break;
+      
+    case 0:
+      printf("\nVoltando ao menu principal...\n");
+      break;
+      
+    default:
+      printf("\nOpcao invalida. Tente novamente.\n");
+    }
+  } while (opcao != 0);
+}
 
-    case 8:
+void menuMaterias(Produto **listaProdutos, MatPrima **arvoreMaterias)
+{
+  int opcao;
+  
+  do
+  {
+    exibirTitle();
+    exibirSubmenuMaterias();
+    
+    while (scanf("%d", &opcao) != 1)
+    {
+      printf("Entrada invalida! Digite um numero correspondente à opcao: ");
+      limparBuffer();
+    }
+    
+    limparTela();
+    
+    switch (opcao)
+    {
+    case 1:
+      cadastrarMaterias(arvoreMaterias);
+      break;
+      
+    case 2:
+      if (*arvoreMaterias == NULL)
+      {
+        printf("\nNenhuma materia-prima cadastrada para excluir.\n");
+      }
+      else
+      {
+        excluirMaterias(arvoreMaterias, listaProdutos);
+      }
+      break;
+      
+    case 3:
+      if (*arvoreMaterias == NULL)
+      {
+        printf("\nNenhuma materia-prima cadastrada para alterar.\n");
+      }
+      else
+      {
+        alterarMaterias(*arvoreMaterias);
+      }
+      break;
+      
+    case 4:
       if (*arvoreMaterias == NULL)
       {
         printf("\nNenhuma materia-prima cadastrada para listar.\n");
@@ -130,8 +181,45 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
         imprimirMaterias(*arvoreMaterias);
       }
       break;
+      
+    case 0:
+      printf("\nVoltando ao menu principal...\n");
+      break;
+      
+    default:
+      printf("\nOpcao invalida. Tente novamente.\n");
+    }
+  } while (opcao != 0);
+}
 
-    case 9:
+void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
+{
+  int opcao;
+
+  do
+  {
+    exibirTitle();
+    exibirMenuPrincipal();
+
+    while (scanf("%d", &opcao) != 1)
+    {
+      printf("Entrada invalida! Digite um numero correspondente à opcao: ");
+      limparBuffer();
+    }
+
+    limparTela();
+
+    switch (opcao)
+    {
+    case 1:
+      menuProdutos(listaProdutos, arvoreMaterias);
+      break;
+
+    case 2:
+      menuMaterias(listaProdutos, arvoreMaterias);
+      break;
+
+    case 3:
       if (*listaProdutos == NULL)
       {
         printf("\nNenhum produto cadastrado para calcular preco.\n");
@@ -142,7 +230,7 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
       }
       break;
 
-    case 10:
+    case 4:
       salvar_produtos(*listaProdutos);
       salvar_materias_primas(*arvoreMaterias);
       salvar_produtos_materias(*listaProdutos);
