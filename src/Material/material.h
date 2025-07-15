@@ -15,12 +15,12 @@ typedef struct MateriaPrima
   struct MateriaPrima *esq, *dir;
 } MatPrima;
 
-// ==================== CRUD da Árvore ====================
+// ==================== CRUD da arvore ====================
 MatPrima* buscarMateriaPorCodigo(MatPrima *raiz, int codigo);
 MatPrima* inserirMateriaArvore(MatPrima *raiz, MatPrima *nova);
 MatPrima* removerMateriaArvore(MatPrima *raiz, int codigo, int *ok);
 
-// ==================== Operações de alto nível (menu) ====================
+// ==================== Operacões de alto nível (menu) ====================
 void cadastrarMaterias(MatPrima **raiz);
 void alterarMaterias(MatPrima *raiz);
 void excluirMaterias(MatPrima **raiz, Produto **listaProdutos);

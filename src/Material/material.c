@@ -6,15 +6,15 @@
 #include "../Produto/produto.h"
 #include "../Arquivos/arquivo.h"
 
-// ==================== Funções auxiliares internas ====================
-//             (Declarações internas não expostas no header)
+// ==================== Funcões auxiliares internas ====================
+//             (Declaracões internas nao expostas no header)
 static MatPrima *criarNoMateria(int codigo, const char *nome, float preco);
 static MatPrima *minimoSubarvore(MatPrima *n);
 static MatPrima *removerNo(MatPrima *raiz, int codigo, int *ok);
 
-// ==================== CRUD da Árvore ====================
+// ==================== CRUD da arvore ====================
 
-/* Insere uma nova matéria-prima na árvore. */
+/* Insere uma nova materia-prima na arvore. */
 MatPrima *inserirMateriaArvore(MatPrima *raiz, MatPrima *nova)
 {
     if (!raiz)
@@ -32,7 +32,7 @@ MatPrima *inserirMateriaArvore(MatPrima *raiz, MatPrima *nova)
     return raiz;
 }
 
-/* Busca uma matéria-prima pelo código. */
+/* Busca uma materia-prima pelo codigo. */
 MatPrima *buscarMateriaPorCodigo(MatPrima *raiz, int codigo)
 {
     while (raiz)
@@ -45,54 +45,54 @@ MatPrima *buscarMateriaPorCodigo(MatPrima *raiz, int codigo)
     return NULL;
 }
 
-/* Remove uma matéria-prima pelo código. */
+/* Remove uma materia-prima pelo codigo. */
 MatPrima *removerMateriaArvore(MatPrima *raiz, int codigo, int *ok)
 {
     return removerNo(raiz, codigo, ok);
 }
 
-// ==================== Operações de alto nível (menu) ====================
+// ==================== Operacões de alto nível (menu) ====================
 
-/* Lê dados do usuário e cadastra uma nova matéria-prima na memória. */
+/* Lê dados do usuario e cadastra uma nova materia-prima na memoria. */
 void cadastrarMaterias(MatPrima **raiz)
 {
     int codigo;
     char nome[100];
     float preco;
 
-    printf("=== Cadastrar Matéria-Prima ===\n");
-    printf("Código: ");
+    printf("=== Cadastrar Materia-Prima ===\n");
+    printf("ID: ");
     scanf("%d", &codigo);
     limparBuffer();
     printf("Nome:   ");
     fgets(nome, sizeof(nome), stdin);
     nome[strcspn(nome, "\n")] = '\0';
-    printf("Preço:  ");
+    printf("Preco:  ");
     scanf("%f", &preco);
 
     if (buscarMateriaPorCodigo(*raiz, codigo))
     {
-        printf("Erro: código %d já existe.\n", codigo);
+        printf("Erro: codigo %d ja existe.\n", codigo);
         return;
     }
 
     MatPrima *nova = criarNoMateria(codigo, nome, preco);
     *raiz = inserirMateriaArvore(*raiz, nova);
 
-    printf("Matéria-prima cadastrada (memória)!\n");
+    printf("Materia-prima cadastrada (memoria)!\n");
 }
 
-/* Lê código, novo nome e preço, e altera a matéria-prima em memória. */
+/* Lê codigo, novo nome e preco, e altera a materia-prima em memoria. */
 void alterarMaterias(MatPrima *raiz)
 {
     int codigo;
-    printf("=== Alterar Matéria-Prima ===\nCódigo: ");
+    printf("=== Alterar Materia-Prima ===\nCodigo: ");
     scanf("%d", &codigo);
 
     MatPrima *m = buscarMateriaPorCodigo(raiz, codigo);
     if (!m)
     {
-        printf("Erro: código não encontrado.\n");
+        printf("Erro: codigo nao encontrado.\n");
         return;
     }
     limparBuffer();
@@ -103,7 +103,7 @@ void alterarMaterias(MatPrima *raiz)
     novoNome[strcspn(novoNome, "\n")] = '\0';
 
     float novoPreco;
-    printf("Novo preço (atual: %.2f): ", m->preco);
+    printf("Novo preco (atual: %.2f): ", m->preco);
     scanf("%f", &novoPreco);
 
     free(m->nome);
@@ -112,14 +112,14 @@ void alterarMaterias(MatPrima *raiz)
         strcpy(m->nome, novoNome);
     m->preco = novoPreco;
 
-    printf("Matéria-prima alterada (memória)!\n");
+    printf("Materia-prima alterada (memoria)!\n");
 }
 
-/* Exclui matéria-prima da memória se não estiver vinculada a produtos. */
+/* Exclui materia-prima da memoria se nao estiver vinculada a produtos. */
 void excluirMaterias(MatPrima **raiz, Produto **listaProdutos)
 {
     int codigo;
-    printf("=== Excluir Matéria-Prima ===\nCódigo: ");
+    printf("=== Excluir Materia-Prima ===\nCodigo: ");
     scanf("%d", &codigo);
 
     for (Produto *p = *listaProdutos; p; p = p->prox)
@@ -128,7 +128,7 @@ void excluirMaterias(MatPrima **raiz, Produto **listaProdutos)
         {
             if (mp->codigo_mat == codigo)
             {
-                printf("Erro: matéria-prima usada pelo produto %d (%s).\n", p->codigo, p->nome);
+                printf("Erro: materia-prima usada pelo produto %d (%s).\n", p->codigo, p->nome);
                 return;
             }
         }
@@ -138,14 +138,14 @@ void excluirMaterias(MatPrima **raiz, Produto **listaProdutos)
     *raiz = removerMateriaArvore(*raiz, codigo, &ok);
     if (!ok)
     {
-        printf("Erro: código não encontrado.\n");
+        printf("Erro: codigo nao encontrado.\n");
         return;
     }
 
-    printf("Matéria-prima removida (memória)!\n");
+    printf("Materia-prima removida (memoria)!\n");
 }
 
-/* Imprime todas as matérias-primas em ordem crescente de código. */
+/* Imprime todas as materias-primas em ordem crescente de codigo. */
 void imprimirMaterias(MatPrima *raiz)
 {
     if (!raiz)
@@ -154,7 +154,7 @@ void imprimirMaterias(MatPrima *raiz)
     }
 
     imprimirMaterias(raiz->esq);
-    printf("Cód:%3d | %-20s | R$ %6.2f\n",
+    printf("Cod:%3d | %-20s | R$ %6.2f\n",
            raiz->codigo, raiz->nome, raiz->preco);
     imprimirMaterias(raiz->dir);
 }
@@ -163,15 +163,15 @@ void imprimirTodasMaterias(MatPrima *raiz)
 {
     if (!raiz)
     {
-        printf("Nenhuma matéria-prima cadastrada.\n");
+        printf("Nenhuma materia-prima cadastrada.\n");
         return;
     }
     imprimirMaterias(raiz);
 }
 
-// ==================== Funções auxiliares internas ====================
+// ==================== Funcões auxiliares internas ====================
 
-/* Cria e inicializa um novo nó de matéria-prima. */
+/* Cria e inicializa um novo no de materia-prima. */
 static MatPrima *criarNoMateria(int codigo, const char *nome, float preco)
 {
     MatPrima *m = malloc(sizeof(MatPrima));
@@ -190,7 +190,7 @@ static MatPrima *criarNoMateria(int codigo, const char *nome, float preco)
     return m;
 }
 
-/* Retorna o nó de menor chave na subárvore. */
+/* Retorna o no de menor chave na subarvore. */
 static MatPrima *minimoSubarvore(MatPrima *n)
 {
     while (n && n->esq)
@@ -201,7 +201,7 @@ static MatPrima *minimoSubarvore(MatPrima *n)
     return n;
 }
 
-/* Remove o nó com código dado da árvore (implementação interna). */
+/* Remove o no com codigo dado da arvore (implementacao interna). */
 static MatPrima *removerNo(MatPrima *raiz, int codigo, int *ok)
 {
     if (!raiz)

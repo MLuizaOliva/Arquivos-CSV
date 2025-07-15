@@ -2,18 +2,17 @@
  *                      GERENCIAMENTO DE PRODUTOS
  * ================================================================
  *
- *  Projeto:     Sistema de cadastro, composição e cálculo de
- *               preço de produtos baseando-se em matérias-primas.
+ *  Projeto:     Sistema de cadastro, composicao e calculo de
+ *               preco de produtos baseando-se em materias-primas.
  *
  *  Disciplina:  Estrutura de Dados
- *  Curso:       Ciência da Computação – UESC
+ *  Curso:       Ciência da Computacao – UESC
  *  Professor:   Edgar Alexander
  *  Ano:         2025
  *
  *  Autores:
  *   - Ariel Pina Ribeiro
  *   - Bruno Gabriel Leite de Matos
- *   - Camilla Matos Araujo
  *   - Henrique Sousa Brito
  *   - Maria Luiza Oliva Santos
  *
@@ -30,7 +29,7 @@ int main()
   Produto *listaProdutos = NULL;
   MatPrima *arvoreMaterias = NULL;
 
-  // Inicializa arquivos (cria se não existir)
+  // Inicializa arquivos (cria se nao existir)
   inicializar_sistema_arquivos();
 
   // Carrega dados dos arquivos

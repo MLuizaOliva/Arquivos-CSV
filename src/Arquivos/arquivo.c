@@ -1,4 +1,5 @@
 #include <string.h>
+#include <windows.h>
 #include "arquivo.h"
 
 // =====================================================
@@ -528,6 +529,9 @@ int adicionar_produto_materia_arquivo(int codigo_produto, int codigo_materia, in
 
 int inicializar_sistema_arquivos()
 {
+    // Cria o diretório 'db' se não existir
+    CreateDirectory("db", NULL);
+
     FILE *arquivo;
 
     arquivo = fopen(ARQUIVO_PRODUTOS, "a");
