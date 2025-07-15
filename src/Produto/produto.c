@@ -193,7 +193,7 @@ void listarProdutos(Produto *lista, MatPrima *arvoreMaterias)
     printf("Preco Final (com lucro): R$ %.2f\n", precoFinal);
 
     listarMateriasDeProduto(lista->ini_mat, arvoreMaterias);
-    printf("----------------------------------------\n");
+    printf("\n\n\n");
     lista = lista->prox;
   }
 }
