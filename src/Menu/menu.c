@@ -61,7 +61,7 @@ void menuProdutos(Produto **listaProdutos, MatPrima **arvoreMaterias)
     
     while (scanf("%d", &opcao) != 1)
     {
-      printf("Entrada invalida! Digite um numero correspondente à opcao: ");
+      printf("Entrada invalida! Digite um numero correspondente a opcao: ");
       limparBuffer();
     }
     
@@ -137,7 +137,7 @@ void menuMaterias(Produto **listaProdutos, MatPrima **arvoreMaterias)
     
     while (scanf("%d", &opcao) != 1)
     {
-      printf("Entrada invalida! Digite um numero correspondente à opcao: ");
+      printf("Entrada invalida! Digite um numero correspondente a opcao: ");
       limparBuffer();
     }
     
@@ -203,7 +203,7 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
 
     while (scanf("%d", &opcao) != 1)
     {
-      printf("Entrada invalida! Digite um numero correspondente à opcao: ");
+      printf("Entrada invalida! Digite um numero correspondente a opcao: ");
       limparBuffer();
     }
 
