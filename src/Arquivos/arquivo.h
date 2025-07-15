@@ -102,7 +102,7 @@ int adicionar_materia_prima_arquivo(MatPrima *materia);
 
 /**
  * Atualiza uma materia-prima no arquivo CSV
- * @param codigo: Codigo da materia-prima a ser atualizada
+ * @param codigo: ID da materia-prima a ser atualizada
  * @param nova_materia: Ponteiro para os novos dados da materia-prima
  * @return SUCESSO em caso de sucesso, codigo de erro caso contrario
  */
@@ -153,8 +153,8 @@ int salvar_produtos_materias(Produto *lista_produtos);
 
 /**
  * Adiciona um relacionamento produto-materia-prima ao arquivo CSV
- * @param codigo_produto: Codigo do produto
- * @param codigo_materia: Codigo da materia-prima
+ * @param codigo_produto: ID do produto
+ * @param codigo_materia: ID da materia-prima
  * @param quantidade: Quantidade da materia-prima utilizada
  * @return SUCESSO em caso de sucesso, codigo de erro caso contrario
  */

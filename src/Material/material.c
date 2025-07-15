@@ -61,7 +61,7 @@ void cadastrarMaterias(MatPrima **raiz)
     float preco;
 
     printf("=== Cadastrar Materia-Prima ===\n");
-    printf("Codigo: ");
+    printf("ID: ");
     scanf("%d", &codigo);
     limparBuffer();
     printf("Nome:   ");

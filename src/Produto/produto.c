@@ -36,7 +36,7 @@ void cadastrarProduto(Produto **lista)
   fgets(nome, sizeof(nome), stdin);
   nome[strcspn(nome, "\n")] = '\0';
 
-  printf("Codigo do produto: ");
+  printf("ID do produto: ");
   scanf("%d", &codigo);
 
   printf("Margem de lucro (ex: 0.20 = 20%%): ");
@@ -49,7 +49,7 @@ void cadastrarProduto(Produto **lista)
 
   for (int i = 0; i < qtdeMat; i++)
   {
-    printf("Codigo da materia-prima #%d: ", i + 1);
+    printf("ID da materia-prima #%d: ", i + 1);
     scanf("%d", &codMat);
     printf("Quantidade necessaria: ");
     scanf("%d", &qtde);
@@ -137,7 +137,7 @@ void excluirProduto(Produto **lista, int codigo)
   if (atual->prox)
     atual->prox->ant = atual->ant;
 
-  printf("Produto '%s' (Codigo: %d) excluido com sucesso!\n", atual->nome, atual->codigo);
+  printf("Produto '%s' (ID: %d) excluido com sucesso!\n", atual->nome, atual->codigo);
 
   free(atual->nome);
 
@@ -169,7 +169,7 @@ void listarProdutos(Produto *lista, MatPrima *arvoreMaterias)
 {
   while (lista)
   {
-    printf("Produto: %s (Codigo: %d)\n", lista->nome, lista->codigo);
+    printf("Produto: %s (ID: %d)\n", lista->nome, lista->codigo);
     printf("Margem de Lucro: %.2f%%\n", lista->margemLucro * 100);
 
     // Calcular custo das matérias-primas
@@ -292,12 +292,12 @@ void listarMateriasDeProduto(MatProduto *lista, MatPrima *arvoreMaterias)
     MatPrima *m = buscarMateriaPorCodigo(arvoreMaterias, lista->codigo_mat);
     if (m)
     {
-      printf("- %s (Codigo %d), Quantidade: %d, Preco unitario: R$ %.2f\n",
+      printf("- %s (ID %d), Quantidade: %d, Preco unitario: R$ %.2f\n",
              m->nome, m->codigo, lista->qtde, m->preco);
     }
     else
     {
-      printf("- Codigo %d nao encontrado na arvore de materias-primas\n", lista->codigo_mat);
+      printf("- ID %d nao encontrado na arvore de materias-primas\n", lista->codigo_mat);
     }
     lista = lista->prox;
   }
