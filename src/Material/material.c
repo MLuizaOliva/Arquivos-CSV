@@ -63,18 +63,19 @@ void cadastrarMaterias(MatPrima **raiz)
     printf("=== Cadastrar Materia-Prima ===\n");
     printf("ID: ");
     scanf("%d", &codigo);
+    
+    if (buscarMateriaPorCodigo(*raiz, codigo))
+    {
+        printf("Erro: codigo %d ja existe.\n", codigo);
+        return;
+    }
+
     limparBuffer();
     printf("Nome:   ");
     fgets(nome, sizeof(nome), stdin);
     nome[strcspn(nome, "\n")] = '\0';
     printf("Preco:  ");
     scanf("%f", &preco);
-
-    if (buscarMateriaPorCodigo(*raiz, codigo))
-    {
-        printf("Erro: codigo %d ja existe.\n", codigo);
-        return;
-    }
 
     MatPrima *nova = criarNoMateria(codigo, nome, preco);
     *raiz = inserirMateriaArvore(*raiz, nova);

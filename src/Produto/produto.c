@@ -39,6 +39,11 @@ void cadastrarProduto(Produto **lista)
   printf("ID do produto: ");
   scanf("%d", &codigo);
 
+  if (buscarProdutoPorCodigo(*lista, codigo)) {
+    printf("Erro: ja existe um produto com o codigo %d.\n", codigo);
+    return;
+  }
+
   printf("Margem de lucro (ex: 0.20 = 20%%): ");
   scanf("%f", &margem);
 
