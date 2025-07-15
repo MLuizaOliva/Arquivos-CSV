@@ -171,6 +171,22 @@ void listarProdutos(Produto *lista, MatPrima *arvoreMaterias)
   {
     printf("Produto: %s (Codigo: %d)\n", lista->nome, lista->codigo);
     printf("Margem de Lucro: %.2f%%\n", lista->margemLucro * 100);
+
+    // Calcular custo das matérias-primas
+    float custo = 0.0;
+    MatProduto *mp = lista->ini_mat;
+    while (mp)
+    {
+      MatPrima *m = buscarMateriaPorCodigo(arvoreMaterias, mp->codigo_mat);
+      if (m)
+        custo += m->preco * mp->qtde;
+      mp = mp->prox;
+    }
+    float precoFinal = custo * (1 + lista->margemLucro);
+
+    printf("Custo do Produto: R$ %.2f\n", custo);
+    printf("Preco Final (com lucro): R$ %.2f\n", precoFinal);
+
     listarMateriasDeProduto(lista->ini_mat, arvoreMaterias);
     printf("----------------------------------------\n");
     lista = lista->prox;
