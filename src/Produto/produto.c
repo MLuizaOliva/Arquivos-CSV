@@ -193,9 +193,11 @@ void listarProdutos(Produto *lista, MatPrima *arvoreMaterias)
     printf("Preco Final (com lucro): R$ %.2f\n", precoFinal);
 
     listarMateriasDeProduto(lista->ini_mat, arvoreMaterias);
-    printf("\n\n\n");
+    printf("\n\n");
     lista = lista->prox;
   }
+  pausarTela();
+  limparTela();
 }
 
 /* Calcula e exibe o preco final de um produto considerando margem e materias-primas */
@@ -297,12 +299,12 @@ void listarMateriasDeProduto(MatProduto *lista, MatPrima *arvoreMaterias)
     MatPrima *m = buscarMateriaPorCodigo(arvoreMaterias, lista->codigo_mat);
     if (m)
     {
-      printf("- %s (ID %d), Quantidade: %d, Preco unitario: R$ %.2f\n",
+      printf(" - %s (ID %d), Quantidade: %d, Preco unitario: R$ %.2f\n",
              m->nome, m->codigo, lista->qtde, m->preco);
     }
     else
     {
-      printf("- ID %d nao encontrado na arvore de materias-primas\n", lista->codigo_mat);
+      printf(" - ID %d nao encontrado na arvore de materias-primas\n", lista->codigo_mat);
     }
     lista = lista->prox;
   }
