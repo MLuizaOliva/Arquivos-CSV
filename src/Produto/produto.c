@@ -71,6 +71,21 @@ void cadastrarProduto(Produto **lista)
 /* Altera nome e margem de lucro de um produto existente */
 void alterarProduto(Produto *lista)
 {
+  if (!lista)
+  {
+    printf("Nenhum produto cadastrado para alterar.\n");
+    return;
+  }
+
+  printf("--- Produtos Disponiveis para Alteracao ---\n");
+  Produto *temp = lista;
+  while (temp)
+  {
+    printf("ID: %d - Nome: %s\n", temp->codigo, temp->nome);
+    temp = temp->prox;
+  }
+  printf("-------------------------------------------\n\n");
+
   int codigo;
   printf("Digite o codigo do produto a alterar: ");
   scanf("%d", &codigo);
@@ -82,13 +97,13 @@ void alterarProduto(Produto *lista)
     return;
   }
 
-  printf("Novo nome do produto: ");
+  printf("Novo nome do produto (atual: %s): ", p->nome);
   limparBuffer();
   char novoNome[100];
   fgets(novoNome, sizeof(novoNome), stdin);
   novoNome[strcspn(novoNome, "\n")] = '\0';
 
-  printf("Nova margem de lucro: ");
+  printf("Nova margem de lucro (atual: %.2f): ", p->margemLucro);
   scanf("%f", &p->margemLucro);
 
   free(p->nome);
@@ -203,8 +218,23 @@ void listarProdutos(Produto *lista, MatPrima *arvoreMaterias)
 /* Calcula e exibe o preco final de um produto considerando margem e materias-primas */
 void calcularPrecoProduto(Produto *lista, MatPrima *arvoreMaterias)
 {
+  if (!lista)
+  {
+    printf("Nenhum produto cadastrado.\n");
+    return;
+  }
+
+  printf("--- Produtos Disponiveis ---\n");
+  Produto *temp = lista;
+  while (temp)
+  {
+    printf("ID: %d - Nome: %s\n", temp->codigo, temp->nome);
+    temp = temp->prox;
+  }
+  printf("----------------------------\n\n");
+
   int codigo;
-  printf("Informe o codigo do produto: ");
+  printf("Informe o codigo do produto para calcular o preco: ");
   scanf("%d", &codigo);
 
   Produto *p = buscarProdutoPorCodigo(lista, codigo);
@@ -226,8 +256,9 @@ void calcularPrecoProduto(Produto *lista, MatPrima *arvoreMaterias)
 
   float precoFinal = custo * (1 + p->margemLucro);
 
-  printf("Custo do Produto: R$ %.2f\n", custo);
-  printf("Preco Final (com lucro): R$ %.2f\n", precoFinal);
+  printf("\n--- Detalhes do Produto: %s ---\n", p->nome);
+  printf("Custo Total das Matérias-Primas: R$ %.2f\n", custo);
+  printf("Preco Final de Venda (com lucro): R$ %.2f\n", precoFinal);
 }
 
 /* Cria uma nova materia-prima associada a um produto */
