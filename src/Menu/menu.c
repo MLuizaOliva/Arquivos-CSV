@@ -29,10 +29,10 @@ void exibirMenuPrincipal()
 void exibirSubmenuProdutos()
 {
   printf("\n--- PRODUTOS ---\n");
-  printf("1. Inserir Produto\n");
-  printf("2. Excluir Produto\n");
-  printf("3. Alterar Produto\n");
-  printf("4. Listar Produtos\n");
+  printf("1. Listar Produtos\n");
+  printf("2. Inserir Produto\n");
+  printf("3. Excluir Produto\n");
+  printf("4. Alterar Produto\n");
   printf("0. Voltar ao Menu Principal\n");
   printf("========================================\n");
   printf("Escolha uma opcao: ");
@@ -41,10 +41,10 @@ void exibirSubmenuProdutos()
 void exibirSubmenuMaterias()
 {
   printf("\n--- MATERIAS-PRIMAS ---\n");
-  printf("1. Inserir Materia-Prima\n");
-  printf("2. Excluir Materia-Prima\n");
-  printf("3. Alterar Materia-Prima\n");
-  printf("4. Listar Materias-Primas\n");
+  printf("1. Listar Materias-Primas\n");
+  printf("2. Inserir Materia-Prima\n");
+  printf("3. Excluir Materia-Prima\n");
+  printf("4. Alterar Materia-Prima\n");
   printf("0. Voltar ao Menu Principal\n");
   printf("========================================\n");
   printf("Escolha uma opcao: ");
@@ -70,6 +70,16 @@ void menuProdutos(Produto **listaProdutos, MatPrima **arvoreMaterias)
     switch (opcao)
     {
     case 1:
+      if (*listaProdutos == NULL)
+      {
+        printf("\nNenhum produto cadastrado para listar.\n");
+      }
+      else
+      {
+        listarProdutos(*listaProdutos, *arvoreMaterias);
+      }
+      break;
+    case 2:
       if (*arvoreMaterias == NULL)
       {
         printf("\nNenhuma materia-prima cadastrada! Cadastre ao menos uma antes de criar um produto.\n");
@@ -80,7 +90,7 @@ void menuProdutos(Produto **listaProdutos, MatPrima **arvoreMaterias)
       }
       break;
       
-    case 2:
+    case 3:
       if (*listaProdutos == NULL)
       {
         printf("\nNenhum produto cadastrado para excluir.\n");
@@ -94,7 +104,7 @@ void menuProdutos(Produto **listaProdutos, MatPrima **arvoreMaterias)
       }
       break;
       
-    case 3:
+    case 4:
       if (*listaProdutos == NULL)
       {
         printf("\nNenhum produto cadastrado para alterar.\n");
@@ -102,17 +112,6 @@ void menuProdutos(Produto **listaProdutos, MatPrima **arvoreMaterias)
       else
       {
         alterarProduto(*listaProdutos);
-      }
-      break;
-      
-    case 4:
-      if (*listaProdutos == NULL)
-      {
-        printf("\nNenhum produto cadastrado para listar.\n");
-      }
-      else
-      {
-        listarProdutos(*listaProdutos, *arvoreMaterias);
       }
       break;
       
@@ -146,10 +145,20 @@ void menuMaterias(Produto **listaProdutos, MatPrima **arvoreMaterias)
     switch (opcao)
     {
     case 1:
+      if (*arvoreMaterias == NULL)
+      {
+        printf("\nNenhuma materia-prima cadastrada para listar.\n");
+      }
+      else
+      {
+        imprimirMaterias(*arvoreMaterias);
+      }
+      break;
+    case 2:
       cadastrarMaterias(arvoreMaterias);
       break;
       
-    case 2:
+    case 3:
       if (*arvoreMaterias == NULL)
       {
         printf("\nNenhuma materia-prima cadastrada para excluir.\n");
@@ -160,7 +169,7 @@ void menuMaterias(Produto **listaProdutos, MatPrima **arvoreMaterias)
       }
       break;
       
-    case 3:
+    case 4:
       if (*arvoreMaterias == NULL)
       {
         printf("\nNenhuma materia-prima cadastrada para alterar.\n");
@@ -170,18 +179,6 @@ void menuMaterias(Produto **listaProdutos, MatPrima **arvoreMaterias)
         alterarMaterias(*arvoreMaterias);
       }
       break;
-      
-    case 4:
-      if (*arvoreMaterias == NULL)
-      {
-        printf("\nNenhuma materia-prima cadastrada para listar.\n");
-      }
-      else
-      {
-        imprimirMaterias(*arvoreMaterias);
-      }
-      break;
-      
     case 0:
       printf("\nVoltando ao menu principal...\n");
       break;
