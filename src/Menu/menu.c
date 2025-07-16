@@ -232,6 +232,8 @@ void exibirMenu(Produto **listaProdutos, MatPrima **arvoreMaterias)
       salvar_materias_primas(*arvoreMaterias);
       salvar_produtos_materias(*listaProdutos);
       printf("\nDados salvos com sucesso!\n");
+      pausarTela();
+      limparTela();
       break;
 
     case 0:

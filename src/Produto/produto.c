@@ -257,7 +257,7 @@ void calcularPrecoProduto(Produto *lista, MatPrima *arvoreMaterias)
   float precoFinal = custo * (1 + p->margemLucro);
 
   printf("\n--- Detalhes do Produto: %s ---\n", p->nome);
-  printf("Custo Total das Matérias-Primas: R$ %.2f\n", custo);
+  printf("Custo Total das Materias-Primas: R$ %.2f\n", custo);
   printf("Preco Final de Venda (com lucro): R$ %.2f\n", precoFinal);
 }
 
